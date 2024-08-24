@@ -79,8 +79,13 @@ public class ScriptExecutor {
                         response.append(responseLine.trim());
                     }
                     JSONObject jsonResponse = new JSONObject(response.toString());
-                    String output = jsonResponse.getString("output");
-                    System.out.println(output);
+                    if (jsonResponse.has("output")) {
+                        System.out.println(jsonResponse.getString("output"));
+                    } else if (jsonResponse.has("result")) {
+                        System.out.println(jsonResponse.getString("result"));
+                    } else {
+                        System.out.println("Empty");
+                    }
                 }
             } else if (responseCode >= 400 && responseCode <= 499) { // client error
                 System.out.println("POST request did not work, client error");
