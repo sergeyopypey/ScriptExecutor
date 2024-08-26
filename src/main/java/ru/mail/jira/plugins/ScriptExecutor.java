@@ -81,8 +81,12 @@ public class ScriptExecutor {
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     if (jsonResponse.has("output")) {
                         System.out.println(jsonResponse.getString("output"));
+                        System.out.println(jsonResponse.getJSONObject("snapshot").get("log"));
                     } else if (jsonResponse.has("result")) {
                         System.out.println(jsonResponse.getString("result"));
+                        if (jsonResponse.has("log")) {
+                            System.out.println(jsonResponse.getString("log"));
+                        }
                     } else {
                         System.out.println("Empty");
                     }
